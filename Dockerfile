@@ -1,12 +1,14 @@
-FROM node:20.10-alpine
+FROM node:20.0-alpine
 
 # Create app directory
 WORKDIR /app
-COPY . .
+COPY package.json .
 
 # Install app dependencies
 RUN npm install
 
+# Bundle app source
+COPY . .
 
 # Expose port and start application
 EXPOSE 3000
