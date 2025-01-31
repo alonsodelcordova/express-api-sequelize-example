@@ -1,0 +1,11 @@
+.gitignore
+.env
+package-lock.json
+**/node_modules
+**/node_modules/**
+**/dist
+**/dist/**
+**/build
+**/*.sqlite
+**/*.sqlite3
+**/*.db

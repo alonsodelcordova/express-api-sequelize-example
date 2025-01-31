@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - $PORT:$PORT
+    volumes:
+      - .:/app
+
