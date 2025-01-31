@@ -5,8 +5,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install app dependencies
-RUN npm install -g npm@11.1.0
-RUN npm install --force
+RUN npm install
 
 # Bundle app source
 COPY . .

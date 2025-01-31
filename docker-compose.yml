@@ -1,7 +1,19 @@
-version: "3.8"
 services:
+  mysqldb:
+    image: mysql:8.2
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_PASS_ROOT
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USERNAME
+      MYSQL_PASSWORD: $DB_PASSWORD
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
   web:
     build: .
+    image: docke-express
     restart: always
     env_file:
       - .env
@@ -9,4 +21,9 @@ services:
       - $PORT:$PORT
     volumes:
       - .:/usr/src/app
+    depends_on:
+      - mysqldb
+    links:
+      - mysqldb
+
 
