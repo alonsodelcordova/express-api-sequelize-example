@@ -1,8 +1,8 @@
 FROM node:20.0-alpine
 
 # Create app directory
-WORKDIR /app
-COPY package.json .
+WORKDIR /usr/src/app
+COPY package*.json ./
 
 # Install app dependencies
 RUN npm install
