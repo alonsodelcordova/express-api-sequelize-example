@@ -19,8 +19,8 @@ services:
     restart: always
     environment:
       PORT: 3000
-      DB_USERNAME: user
-      DB_PASSWORD: user
+      DB_USERNAME: root
+      DB_PASSWORD: root
       DB_NAME: db_name1
       DB_PASS_ROOT: root
       DB_HOST: mysqldb
