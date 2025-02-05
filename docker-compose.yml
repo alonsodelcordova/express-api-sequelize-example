@@ -16,7 +16,6 @@ services:
       - express-mysql
   web:
     build: ./app
-    image: docke-express
     restart: always
     environment:
       PORT: 3000

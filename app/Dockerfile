@@ -7,7 +7,7 @@ WORKDIR /home/node/app
 COPY package.json ./
 USER node
 # Install app dependencies
-RUN npm install
+RUN npm install --force
 
 # Bundle app source
 COPY --chown=node:node . .
