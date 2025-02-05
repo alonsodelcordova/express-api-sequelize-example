@@ -26,8 +26,6 @@ services:
       DB_HOST: mysqldb
     ports:
       - 3000:3000
-    volumes:
-      - ./app:/home/node/app
     depends_on:
       - mysqldb
     links:
