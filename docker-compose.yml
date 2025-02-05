@@ -1,29 +1,47 @@
+version: '3.1'
 services:
   mysqldb:
     image: mysql:8.2
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: $DB_PASS_ROOT
-      MYSQL_DATABASE: $DB_NAME
-      MYSQL_USER: $DB_USERNAME
-      MYSQL_PASSWORD: $DB_PASSWORD
+      MYSQL_DATABASE: db_name1
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
     volumes:
       - ./data:/var/lib/mysql
+    networks:
+      - express-mysql
   web:
-    build: .
+    build: ./app
     image: docke-express
     restart: always
-    env_file:
-      - .env
+    environment:
+      PORT: 3000
+      DB_USERNAME: user
+      DB_PASSWORD: user
+      DB_NAME: db_name1
+      DB_PASS_ROOT: root
+      DB_HOST: mysqldb
     ports:
-      - $PORT:$PORT
+      - 3000:3000
     volumes:
-      - .:/usr/src/app
+      - ./app:/home/node/app
     depends_on:
       - mysqldb
     links:
       - mysqldb
+    networks:
+      - express-mysql
+
+networks:
+  express-mysql:
+    driver: bridge
+
+volumes:
+  data:
+
 
 

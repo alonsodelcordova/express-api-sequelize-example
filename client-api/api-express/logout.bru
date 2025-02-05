@@ -1,0 +1,22 @@
+meta {
+  name: logout
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/logout
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Token p4vrPB+ouTnTL/CUnkbKSAKNB4+I5v8GJ8t8c7jecr8=
+}
+
+body:json {
+  {
+    "username":"alonso5",
+    "password":"123"
+  }
+}
