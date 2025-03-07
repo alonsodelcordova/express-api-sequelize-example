@@ -65,6 +65,10 @@ class Token extends Model {
         },
         userId: {
           type: DataTypes.INTEGER,
+          references: {
+            model: User,
+            key: "id",
+          },
           allowNull: false,
         },
         deviceId: {

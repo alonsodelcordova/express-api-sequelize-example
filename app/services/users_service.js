@@ -15,17 +15,16 @@ function generarToken(username) {
 }
 
 
-
 const getUsers = async () => {
-  return await User.findAll();
+  return await User.findAll({
+    attributes: { exclude: ["password", "createdAt", "updatedAt"] }
+  });
 };
 
 const createUser = async (datos) => {
   try {
     const user = User.build(datos);
-    user.set({
-      password: encriptarPassword(user.password),
-    })
+    user.set({ password: encriptarPassword(user.password) });
     const respuesta = await user.save();
     return {
       mensaje: "Usuario agregado",
@@ -34,24 +33,16 @@ const createUser = async (datos) => {
     };
   } catch (error) {
     var errors = error.errors.map((e) => e.message);
-    return {
-      errors,
-      isSuccess: false,
-    };
+    return { errors, isSuccess: false};
   }
 };
 
 //----------- login ------------------------------
-const inciarSesion = async (username, password) => {
+const inciarSesion = async (username, password, device) => {
 
-  //obtener  device
-
-
-
+  //obtener  usuario
   const user = await User.findOne({
-    where: {
-      name: username
-    }
+    where: { name: username }
   });
   
   if (!user) {
@@ -60,7 +51,6 @@ const inciarSesion = async (username, password) => {
       isSuccess: false,
     };
   }
-
 
   const passwordDesencrypt = encriptarPassword(password);
   if (passwordDesencrypt != user.password) {
@@ -73,14 +63,13 @@ const inciarSesion = async (username, password) => {
   }
 
   var token = await Token.findOne({
-    where: {
-      userId: user.id,
-    },
+    where: { userId: user.id }
   });
   if (!token) {
     token = await Token.create({
       token: generarToken(username),
       userId: user.id,
+      deviceId: device,
     });
   }
   return {
@@ -95,9 +84,7 @@ const inciarSesion = async (username, password) => {
 //----------- logout ------------------------------
 const cerrarSesion = async (tokenSRC) => {
   const token = await Token.findOne({
-    where: {
-      token: tokenSRC,
-    },
+    where: { token: tokenSRC }
   });
   if (!token) {
     return {

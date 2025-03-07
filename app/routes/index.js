@@ -16,7 +16,8 @@ router.post("/login", async (req, res) => {
       mensaje: "Faltan datos",
     });
   }
-  const respuesta = await inciarSesion(username, password);
+  var device = req.headers["user-agent"];
+  const respuesta = await inciarSesion(username, password, device);
   if (respuesta.isSuccess) {
     res.json(respuesta);
   } else {

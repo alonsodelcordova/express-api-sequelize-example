@@ -41,7 +41,6 @@ const saveImagenProducto = async (id, imagen) => {
         mensaje: "Error al guardar la imagen",
         isSuccess: false,
       };
-    } else {
     }
   });
   console.log(resp);

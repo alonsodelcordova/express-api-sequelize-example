@@ -32,12 +32,6 @@ router.post("/imagen/:id", async (req, res) => {
         console.log(err);
       }
     });
-    /*const respuesta = await saveImagenProducto(id, imagen);
-    if (respuesta.isSuccess) {
-      res.json(respuesta);
-    } else {
-      res.status(400).json(respuesta);
-    }*/
     res.json({
       mensaje: "Imagen guardada",
       msg: imagen.name
@@ -48,13 +42,6 @@ router.post("/imagen/:id", async (req, res) => {
       isSuccess: false,
     });
   }
- 
-  /*const respuesta = await saveImagenProducto(id, imagen);
-  if (respuesta.isSuccess) {
-    res.json(respuesta);
-  } else {
-    res.status(400).json(respuesta);
-  }*/
 });
 
 
